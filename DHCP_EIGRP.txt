@@ -1,0 +1,40 @@
+
+
+Router(config)#hostname rb
+rb(config)#ip dhcp excluded-address 192.168.2.0 192.168.2.5
+rb(config)#ip dhcp pool rb
+rb(dhcp-config)#net 192.168.2.0 255.255.255.0
+rb(dhcp-config)#dns-server 8.8.8.8
+rb(dhcp-config)#domain-name rb
+rb(dhcp-config)#default-router 192.168.2.1
+rb(dhcp-config)#exit
+
+
+
+
+
+rb(config)#
+rb(config)#int gi0/0
+rb(config-if)#ip add 192.168.2.1 255.255.255.0
+rb(config-if)#no shut
+
+
+
+
+
+rb(config)#int s0/0/0
+rb(config-if)#ip add 172.16.0.2 255.255.0.0
+rb(config-if)#no shut
+
+
+rb(config)#router eigrp 10
+rb(config-router)#net 192.168.2.0 0.0.0.255
+rb(config-router)#net 172.16.0.0 255.255.0.0
+rb(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 172.16.0.1 (Serial0/0/0) is up: new adjacency
+
+rb(config-router)#eigrp router-id 5.5.5.5
+rb(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 172.16.0.1 (Serial0/0/0) is down: route configuration changed
+
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 172.16.0.1 (Serial0/0/0) is up: new adjacency
