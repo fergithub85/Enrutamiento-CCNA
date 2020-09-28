@@ -1,0 +1,55 @@
+PARAMETROS BASICOS DE CONFIGURACION DE VLANS
+
+
+Switch>ena
+Switch#conf te 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#hostname SW1
+SW1(config)#vlan 10
+SW1(config-vlan)#name ADMINISTRACION
+SW1(config-vlan)#vlan 20
+SW1(config-vlan)#name IMPRESORAS
+SW1(config-vlan)#int range fa0/1-10
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#int range fa0/15-17
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+
+
+------------CREAR ENLACE TRONCAL------------------------------
+SW1#conf te 
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW1(config)#int g0/1
+SW1(config-if)#switchport mode trunk
+
+
+-------------COMANDOS-----------------------------------------
+
+SW1(config)#do show vlan
+
+SW1#show int trunk
+
+Router(config-if)#do show ip int br
+
+
+
+-----GENERAR INTERFACES VIRTUALES -------------------------- 
+
+Router>ena
+Router#conf te
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int gi0/0.10
+Router(config-subif)#encapsulation dot1q 10
+Router(config-subif)#ip add 172.30.0.1 255.255.255.240
+Router(config-subif)#int gi0/0.20
+Router(config-subif)#encapsulation dot1q 20
+Router(config-subif)#ip add 172.30.0.17 255.255.255.240
+Router(config-subif)#int gi0/0 
+Router(config-if)#no shut
+
+
+
+
+

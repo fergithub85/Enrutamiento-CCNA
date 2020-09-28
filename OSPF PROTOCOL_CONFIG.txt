@@ -1,0 +1,38 @@
+OSPF Es un protocolo de estado de enlace, calcula en base al ancho de banda disponible la mejor ruta. escala hasta 50 routers.
+
+
+
+---ROUTER 1---------
+
+RA(config)#router ospf 5
+RA(config-router)#network 192.168.1.0 0.0.0.255 area 0
+RA(config-router)#net 172.17.0.0 0.0.255.255 area 0
+RA(config-router)#default-information originate   // (sirve para que comparte las rutas predeterminadas en caso de no haberlas declarado)
+RA(config-router)#router-id 5.5.5.5
+RA(config-router)#Reload or use "clear ip ospf process" command, for this to take effect
+
+
+00:09:59: %OSPF-5-ADJCHG: Process 5, Nbr 192.168.4.1 on Serial0/0/1 from LOADING to FULL, Loading Done
+
+
+
+
+
+--ROUTER 2---
+
+
+Router(config)#router ospf 5
+Router(config-router)#net 192.168.3.0 0.0.0.255 area 0
+Router(config-router)#net 172.17.0.0  0.0.255.255 area 0
+
+00:09:59: %OSPF-5-ADJCHG: Process 5, Nbr 192.168.1.1 on Serial0/1/0 from LOADING to FULL, Loading Done
+
+
+
+---------------------
+
+#show ip protocols
+#show ip eigrp topology
+
+#show ip route
+#show ip ospf data
