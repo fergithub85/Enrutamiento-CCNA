@@ -1,0 +1,21 @@
+
+
+Router(config-if)#
+Router(config-if)#int s0/3/0
+Router(config-if)#ip add 10.0.2.2 255.255.255.252
+Router(config-if)#int s0/2/0
+Router(config-if)#ip address 10.0.1.2 255.255.255.252
+Router(config-if)#router ospf 1
+Router(config-router)#net 192.168.10.0 0.0.0.255 area 0
+Router(config-router)#net 192.168.30.0 0.0.0.255 area 0
+Router(config-router)#net 192.168.20.0 0.0.0.255 area 0
+Router(config-router)#net 10.0.2.0 0.0.0.3 area 0
+Router(config-router)#net 10.0.1.0 0.0.0.3 area 0
+
+
+
+Router(config-if)#router ospf 1
+Router(config-router)#net 192.168.30.0 0.0.0.255 area 0
+Router(config-router)#net 10.0.1.0 0.0.0.3 area 0
+Router(config-router)#net 10.0.3.0 0.0.0.3 area 0
+Router(config-router)#net 10.0.4.0 0.0.0.3 area 0
