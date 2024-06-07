@@ -1,0 +1,14 @@
+R2(config)#router EIGRP 10
+R2(config-router)#net 10.0.7.0 0.0.0.255
+R2(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 10.0.7.1 (Serial0/0/1) is up: new adjacency
+
+R2(config-router)#net 10.10.3.0 0.0.0.255
+R2(config-router)#net 10.10.1.0 0.0.0.255
+R2(config-router)#net 10.10.5.0 0.0.0.255
+R2(config-router)#network 192.168.1.0 0.0.0.255
+R2(config-router)#network 192.168.20.0 0.0.0.255
+R2(config-router)#network 192.168.10.0 0.0.0.255
+R2(config-router)#network 192.168.40.0 0.0.0.255
+R2(config-router)#network 192.168.90.0 0.0.0.255
+R2(config-router)#network 192.168.0.0 0.0.0.255
