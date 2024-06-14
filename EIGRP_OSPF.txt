@@ -1,0 +1,30 @@
+R2(config)#router EIGRP 10
+R2(config-router)#net 10.0.7.0 0.0.0.255
+R2(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 10.0.7.1 (Serial0/0/1) is up: new adjacency
+
+R2(config-router)#net 10.10.3.0 0.0.0.255
+R2(config-router)#net 10.10.1.0 0.0.0.255
+R2(config-router)#net 10.10.5.0 0.0.0.255
+R2(config-router)#network 192.168.1.0 0.0.0.255
+R2(config-router)#network 192.168.20.0 0.0.0.255
+R2(config-router)#network 192.168.10.0 0.0.0.255
+R2(config-router)#network 192.168.40.0 0.0.0.255
+R2(config-router)#network 192.168.90.0 0.0.0.255
+R2(config-router)#network 192.168.0.0 0.0.0.255
+
+
+
+Router(config)#router OSPF 1
+Router(config-router)#net 10.10.8.0 0.0.0.3 area 0
+Router(config-router)#net 10.0.9.0 0.0.0.3 area 0
+Router(config-router)#
+02:26:02: %OSPF-5-ADJCHG: Process 1, Nbr 192.168.40.1 on Serial0/0/1 from LOADING to FULL, Loading Done
+
+Router(config-router)#
+Router(config-router)#net 172.17.0.0 0.0.255.255 area 0
+Router(config-router)#net 172.16.0.0 0.0.255.255 area 0
+Router(config-router)#net 10.10.4.0 0.0.0.3 area 0
+Router(config-router)#net 10.10.6.0 0.0.0.3 area 0
+Router(config-router)#
+02:30:01: %OSPF-5-ADJCHG: Process 1, Nbr 172.17.0.1 on Serial0/0/0 from LOADING to FULL,
