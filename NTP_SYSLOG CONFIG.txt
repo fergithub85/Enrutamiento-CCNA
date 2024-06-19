@@ -1,0 +1,19 @@
+Router(config)#sh clock
+Router(config)#ntp server 172.16.0.10
+Router(config)#do ping 172.16.0.10
+
+
+Router(config)#logg
+Router(config)#logging ?
+Router(config)#logging 172.16.0.10
+Router(config)#lo
+Router(config)#logging trap ?
+  debugging  Debugging messages                (severity=7)
+  <cr>
+Router(config)#
+Router(config)#exit
+
+
+-habilitar NTP y SYSLOG EN SERVIDOR
+-EJEMPLO HECHO CON SERV IP FIJA
+172.16.0.10
