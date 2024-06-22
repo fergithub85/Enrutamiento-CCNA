@@ -1,0 +1,62 @@
+Router(config)#hostname R-VoIP
+R-VoIP(config)#int fa0/0
+R-VoIP(config-if)#no shut
+
+
+
+R-VoIP(config-if)#int fa0/0.10
+R-VoIP(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.10, changed state to up
+enca
+R-VoIP(config-subif)#encapsulation dot1Q 10
+R-VoIP(config-subif)#ip add 192.168.10.1 255.255.255.0
+R-VoIP(config-subif)#exit
+
+R-VoIP(config)#ip dhcp excluded-address 192.168.10.1 
+R-VoIP(config)#ip dhcp pool DHCP_PHONE
+R-VoIP(dhcp-config)#net 192.168.10.0 255.255.255.0
+R-VoIP(dhcp-config)#defa
+R-VoIP(dhcp-config)#default-router 192.168.10.1 
+R-VoIP(dhcp-config)#option 150 ip 192.168.10.1
+R-VoIP(dhcp-config)#exit
+
+R-VoIP(config)#telephony-service 
+R-VoIP(config-telephony)#ip source-address 192.168.10.1 port 2000
+R-VoIP(config-telephony)#max-dn 3
+R-VoIP(config-telephony)#max-ephones 3
+R-VoIP(config-telephony)#auto assign 1 to 3
+R-VoIP(config-telephony)#exit
+R-VoIP(config)#ephone-dn 1
+R-VoIP(config-ephone-dn)#number 0811
+R-VoIP(config-ephone-dn)#exit
+
+R-VoIP(config)#ephone-dn 2
+R-VoIP(config-ephone-dn)#number 0812
+R-VoIP(config-ephone-dn)#exit
+R-VoIP(config)#ephone-dn 3
+R-VoIP(config-ephone-dn)#%LINK-3-UPDOWN: Interface ephone_dsp DN 3.1, changed state to up
+
+R-VoIP(config-ephone-dn)#number 0813
+R-VoIP(config-ephone-dn)#exit
+
+
+
+
+
+
+
+
+
+
+Switch(config)#int fa0/1
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#exit
+Switch(config)#
+Switch(config)#vlan 10
+Switch(config-vlan)#name VOICE
+Switch(config-vlan)#EXIT
+Switch(config)#
+Switch(config)#int range fa0/2-4
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport voice vlan 10
+exit
