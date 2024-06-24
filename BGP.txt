@@ -1,0 +1,33 @@
+
+
+Router1 
+
+
+Router(config)#int s0/0/0
+Router(config-if)#ip add 192.168.1.2 255.255.255.252
+Router(config-if)#router bgp 65002
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0/0, changed state to up
+
+Router(config-router)#neighbor 192.168.1.1 remote-as 65001
+Router(config-router)#%BGP-5-ADJCHANGE: neighbor 192.168.1.1 Up
+Router(config-router)#network 20.0.0.0 mask 255.255.255.0 (LAN remota)
+Router(config-router)#exit
+
+
+
+
+Router 2
+
+Router(config)#int s0/0/0
+Router(config-if)#ip add 192.168.1.1 255.255.255.252
+Router(config-if)#router bgp 65001
+Router(config-router)#neighbor 192.168.1.2 remote-as 65002
+Router(config-router)#network 10.0.0.0 mask 255.255.255.0  (LAN remota)
+exit
+
+
+checklist:
+
+
+show ip bgp
+show ip bgp summary
