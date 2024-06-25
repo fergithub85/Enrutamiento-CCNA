@@ -20,3 +20,9 @@ ciscoasa(config-if)#switchport access vlan 3
 ciscoasa(config)#access-list ACL1 extended permit icmp any any
 ciscoasa(config)#access-group ACL1 out interface DMZ 
 ciscoasa(config)#access-list ACL1 extended permit tcp any any eq www
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+->>>access-list ACL1 extended permit icmp any any
+"configura una regla dentro de la ACL llamada ACL1 que permite todo el tráfico ICMP desde cualquier dirección IP de origen a cualquier dirección IP de destino"
