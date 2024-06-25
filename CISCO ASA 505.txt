@@ -1,0 +1,22 @@
+
+
+
+ciscoasa(config)#int vlan 3
+ciscoasa(config-if)#nameif DMZ
+ERROR: This license does not allow configuring more than 2 interfaces with nameif and without a "no forward" command on this interface or on 1 interface(s) with nameif already configured.
+ciscoasa(config-if)#no forward int vlan 1
+ciscoasa(config-if)#nameif DMZ
+INFO: Security level for "DMZ" set to 0 by default.
+ciscoasa(config-if)#security-level 50
+ciscoasa(config-if)#ip add 192.168.3.1 255.255.255.0
+ciscoasa(config-if)#exit
+
+	
+ciscoasa(config)#int et0/0
+ciscoasa(config-if)#switchport mode access
+ciscoasa(config-if)#switchport access vlan 3
+
+
+ciscoasa(config)#access-list ACL1 extended permit icmp any any
+ciscoasa(config)#access-group ACL1 out interface DMZ 
+ciscoasa(config)#access-list ACL1 extended permit tcp any any eq www
