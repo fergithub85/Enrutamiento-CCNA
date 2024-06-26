@@ -26,3 +26,46 @@ ciscoasa(config)#access-list ACL1 extended permit tcp any any eq www
 
 ->>>access-list ACL1 extended permit icmp any any
 "configura una regla dentro de la ACL llamada ACL1 que permite todo el tráfico ICMP desde cualquier dirección IP de origen a cualquier dirección IP de destino"
+-------------------------------------------------------------------------------------
+
+ciscoasa(config)#domain-name ccnasecurity.com
+ciscoasa(config)#clock set 20:03:00 26 Jul 2024
+
+
+ciscoasa(config)#int vlan 1
+ciscoasa(config-if)#nameif inside
+ciscoasa(config-if)#ip add 192.168.1.1 255.255.255.0
+ciscoasa(config-if)#security-level 100
+ciscoasa(config-if)#exit
+
+ciscoasa(config)#int vlan 2
+ciscoasa(config-if)#nameif outside
+ciscoasa(config-if)#ip add 209.165.200.226
+ciscoasa(config-if)#ip add 209.165.200.226 255.255.255.248
+ciscoasa(config-if)#security-level 0
+
+ciscoasa(config-if)#show ip address
+ciscoasa(config-if)#show switch vlan
+
+ciscoasa(config)#route outside 0.0.0.0 0.0.0.0  209.165.200.225
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
