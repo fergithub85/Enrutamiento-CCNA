@@ -1,0 +1,136 @@
+--------------------------------------------AUDITORIA DE RED-----------------------
+-----------------------------------------------------------------------------------
+root@kali:~# netdiscover -r 10.0.2.0
+
+ Currently scanning: Finished!   |   Screen View: Unique Hosts                                                        
+                                                                                                                      
+ 8 Captured ARP Req/Rep packets, from 6 hosts.   Total size: 480                                                      
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 10.0.2.1        52:54:00:12:35:00      2     120  Unknown vendor                                                     
+ 10.0.2.2        52:54:00:12:35:00      1      60  Unknown vendor                                                     
+ 10.0.2.3        08:00:27:68:2a:50      1      60  CADMUS COMPUTER SYSTEMS                                            
+ 10.0.2.5        08:00:27:e6:0f:a5      1      60  CADMUS COMPUTER SYSTEMS                                            
+ 10.0.2.6        08:00:27:1f:b6:49      2     120  CADMUS COMPUTER SYSTEMS                                            
+ 10.0.2.14       08:00:27:06:50:2f      1      60  CADMUS COMPUTER SYSTEMS        
+
+
+
+
+Syslog - Para registro de eventos y monitoreo
+
+root@kali:~# tail -f /var/log/syslog
+Jun 26 12:38:00 kali NetworkManager[557]: <info>    nameserver '192.168.1.1'
+Jun 26 12:38:00 kali NetworkManager[557]: <info>    domain name 'srt.gov.ar'
+Jun 26 12:38:00 kali NetworkManager[557]: <info>  (eth1): DHCPv4 state changed bound -> bound
+Jun 26 12:38:00 kali dbus[530]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+
+
+
+
+ESCANEO DE EQUIPO LOCAL
+root@kali:~# nmap localhost
+
+Starting Nmap 7.01 ( https://nmap.org ) at 2024-06-26 12:06 EDT
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.0000010s latency).
+Other addresses for localhost (not scanned): ::1
+All 1000 scanned ports on localhost (127.0.0.1) are closed
+
+Nmap done: 1 IP address (1 host up) scanned in 0.13 seconds
+root@kali:~# nmap 10.0.2.0/24
+
+Starting Nmap 7.01 ( https://nmap.org ) at 2024-06-26 12:08 EDT
+Nmap scan report for 10.0.2.1
+Host is up (0.00059s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: 52:54:00:12:35:00 (QEMU virtual NIC)
+
+Nmap scan report for 10.0.2.2
+Host is up (0.0017s latency).
+Not shown: 996 filtered ports
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+445/tcp  open  microsoft-ds
+2179/tcp open  vmrdp
+8080/tcp open  http-proxy
+MAC Address: 52:54:00:12:35:00 (QEMU virtual NIC)
+
+Nmap scan report for 10.0.2.3
+Host is up (0.00026s latency).
+All 1000 scanned ports on 10.0.2.3 are filtered
+MAC Address: 08:00:27:68:2A:50 (Oracle VirtualBox virtual NIC)
+
+Nmap scan report for 10.0.2.6
+Host is up (0.0000020s latency).
+All 1000 scanned ports on 10.0.2.6 are closed
+
+Nmap done: 256 IP addresses (4 hosts up) scanned in 13.72 seconds
+
+
+--------------------------------------------------------------------------
+
+root@kali:~# nmap -sS -sV -O -p- 10.0.2.14
+
+Starting Nmap 7.01 ( https://nmap.org ) at 2024-06-26 12:37 EDT
+Nmap scan report for 10.0.2.14
+Host is up (0.00094s latency).
+Not shown: 65344 closed ports, 184 filtered ports
+PORT      STATE SERVICE     VERSION
+139/tcp   open  netbios-ssn Microsoft Windows 98 netbios-ssn
+49152/tcp open  msrpc       Microsoft Windows RPC
+49153/tcp open  msrpc       Microsoft Windows RPC
+49154/tcp open  msrpc       Microsoft Windows RPC
+49155/tcp open  msrpc       Microsoft Windows RPC
+49156/tcp open  msrpc       Microsoft Windows RPC
+49157/tcp open  msrpc       Microsoft Windows RPC
+MAC Address: 08:00:27:06:50:2F (Oracle VirtualBox virtual NIC)
+Device type: general purpose
+Running: Microsoft Windows 7|2008|8.1
+OS CPE: cpe:/o:microsoft:windows_7::- cpe:/o:microsoft:windows_7::sp1 cpe:/o:microsoft:windows_server_2008::sp1 cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_8.1
+OS details: Microsoft Windows 7 SP0 - SP1, Windows Server 2008 SP1, Windows 8, or Windows 8.1 Update 1
+Network Distance: 1 hop
+Service Info: OSs: Windows 98, Windows; CPE: cpe:/o:microsoft:windows_98, cpe:/o:microsoft:windows
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 806.77 seconds
+
+
+
+-----------------------------------------------------------------------------
+
+root@kali:~# nikto -h 10.0.2.14
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ No web server found on 10.0.2.14:80
+---------------------------------------------------------------------------
++ 0 host(s) tested
+---------------------------------------------------------------------------
+
+
+
+
+
+telnet 10.0.2.14 139
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
