@@ -1,0 +1,20 @@
+
+SELECCIONAR SERVIDOR
+-ESTABLECER IP FIJA
+
+services: ON
+configurar Domain Name ej: cisco.com
+configurar usuarios y claves
+SMTP - POP3 :ON
+
+
+Configura el cliente de correo con los detalles del usuario:
+Display Name: User1
+Email Address: user1@servidor.com
+Incoming Mail Server (POP3): 192.168.1.2  (ip server)
+Outgoing Mail Server (SMTP): 192.168.1.2
+Username: user1
+Password: password1
+
+
+
