@@ -45,4 +45,38 @@ Router(config)#access-list 110 permit ip any any
 Router(config)#interface gigabitEthernet 0/3/0
 Router(config-if)#ip access-group 110 out
 Router(config-if)#
+*************************simular ataques
+
+
+Desde una PC atacante en la LAN 192.168.10.0, usa el comando telnet para intentar conectarte a varios puertos del servidor en 172.16.30.0:
+bash
+Copiar código
+telnet 172.16.30.4 80  # Intentar conectarse al puerto 80 (HTTP)
+telnet 172.16.30.4 21  # Intentar conectarse al puerto 21 (FTP)
+
+
+Simular un Ataque de Denegación de Servicio (DoS) con Pings:
+
+Escenario: Un atacante envía un gran número de pings para intentar saturar la red.
+Cómo simular:
+Desde una PC, usa un ping continuo para enviar múltiples solicitudes al servidor:
+bash
+Copiar código
+ping 172.16.30.4 -t  # Enviar pings continuamente
+
+
+
+
+Monitorea los Resultados: Observa los logs en los routers (show access-lists) para confirmar
+
+
+
+
+
+
+
+
+
+
+
 
