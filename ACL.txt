@@ -1,0 +1,48 @@
+
+Configura la ACL en Router 1 (bloquear tráfico HTTP desde la LAN 192.168.10.0 
+a la LAN 172.16.30.0):
+
+
+
+
+access-list 110 deny tcp 192.168.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80  # Bloquear tráfico HTTP
+access-list 110 permit ip any any  # Permitir todo el resto del tráfico
+
+interface gigabitEthernet 0/1  # Interfaz hacia el Router 2
+ip access-group 110 out  # Aplicar la ACL en dirección de salida
+exit
+
+
+
+
+
+
+elimina la regla actual que bloquea el tráfico HTTP:
+
+Router(config)#no access-list 110 deny tcp 192.168.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80
+Router(config)#access-list 110 permit ip any any
+Router(config)#
+
+regla para permitir el tráfico HTTP
+access-list 110 permit tcp 192.168.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80
+
+Asegúrate de que la ACL aún tiene la regla que permite todo el resto del tráfico
+access-list 110 permit ip any any
+
+
+
+
+
+
+--quedaría así:
+
+Router(config-if)#ip route 192.168.10.0 255.255.255.0 10.100.1.1
+Router(config)#ip route 172.16.30.0 255.255.255.0 10.100.1.2
+%Invalid next hop address (it's this router)
+Router(config)#ip route 172.16.30.0 255.255.255.0 10.100.1.1
+Router(config)#access-list 110 deny tcp 192.168.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80
+Router(config)#access-list 110 permit ip any any 
+Router(config)#interface gigabitEthernet 0/3/0
+Router(config-if)#ip access-group 110 out
+Router(config-if)#
+
