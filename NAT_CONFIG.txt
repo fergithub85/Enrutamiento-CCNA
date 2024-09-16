@@ -1,0 +1,66 @@
+R-NAT(dhcp-config)#ip dhcp pool DHCP_LAN
+R-NAT(dhcp-config)#net 192.168.1.0 255.255.255.0
+R-NAT(dhcp-config)#default-router 192.168.1.1
+R-NAT(dhcp-config)#dns-server 8.8.8.8
+R-NAT(dhcp-config)#domain-name cisco
+R-NAT(dhcp-config)#ex
+R-NAT(config)#
+
+
+
+R-NAT(config)#int s0/0/0
+R-NAT(config-if)#ip add 1.1.1.1 255.255.255.252
+R-NAT(config-if)#exit
+
+
+R-NAT(config)#ip nat inside source static 192.168.1.10 209.154.32.7
+R-NAT(config)#ip nat inside source static 192.168.1.11 209.154.32.8
+R-NAT(config)#int gi0/0
+R-NAT(config-if)#ip nat inside
+R-NAT(config-if)#int s0/0/0
+R-NAT(config-if)#ip nat outside
+
+
+
+R-NAT#show ip nat trans
+R-NAT#show ip nat translations 
+Pro  Inside global     Inside local       Outside local      Outside global
+---  209.154.32.7      192.168.1.10       ---                ---
+---  209.154.32.8      192.168.1.11       ---                ---
+
+
+---------------
+Router(config)#hostname WAN
+WAN(config)#int s0/0/0
+WAN(config-if)#ip add 1.1.1.2 255.255.255.252
+WAN(config-if)#ex
+WAN(config)#
+WAN(config)#do ping 192.168.1.1 
+
+
+WAN(config)#router eigrp 10
+WAN(config-router)#net 1.1.1.0 0.0.0.3
+WAN(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 10: Neighbor 1.1.1.1 (Serial0/0/0) is up: new adjacency
+
+
+
+aplicar NAT  de manera dinamica
+
+R-NAT(config)#ip access-list standard lan-nat
+R-NAT(config-std-nacl)#permit 192.168.1.0 0.0.0.255
+R-NAT(config-std-nacl)#ex
+R-NAT(config)#ip nat inside source list lan-nat Pool pool-nat
+
+
+R-NAT#show ip nat translations 
+Pro  Inside global     Inside local       Outside local      Outside global
+---  209.154.32.7      192.168.1.10       ---                ---
+---  209.154.32.8      192.168.1.11       ---                ---
+
+R-NAT#show ip nat stat
+
+
+
+
+
