@@ -1,0 +1,102 @@
+router
+
+Router(config)#ip dhcp pool Subred1
+Router(dhcp-config)#network 172.16.0.0 255.255.255.192
+Router(dhcp-config)#default-router 172.16.0.1
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+
+Router(config)#ip dhcp pool Subred2
+Router(dhcp-config)#network 172.16.0.64 255.255.255.192
+Router(dhcp-config)#default-router 172.16.0.65
+Router(dhcp-config)#dns-server 8.8.8.8
+Router(dhcp-config)#exit
+
+Router(config)#interface gig0/0.10
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip address 172.16.0.1 255.255.255.192
+Router(config-subif)#exit
+
+Router(config)#interface gig0/0.20
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip address 172.16.0.65 255.255.255.192
+Router(config-subif)#exit
+
+Router(config)#interface gig0/0.10
+Router(config-subif)#ip helper-address 172.16.0.1
+Router(config-subif)#exit
+Router(config)#interface gig0/0.20
+Router(config-subif)#ip helper-address 172.16.0.1
+Router(config-subif)#exit
+
+Router(config)#int gi0/0
+Router(config-if)#no shut
+
+
+
+
+switch
+
+Switch(config)#vlan 10
+Switch(config-vlan)#name Subred1
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#name Subred2
+Switch(config-vlan)#exit
+
+Switch(config)#int gi0/1
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#switchport trunk allowed vlan 10,20
+Switch(config-if)#exit
+
+
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#int range fa0/9-14
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#
+
+
+
+switch2
+
+Switch(config)#vlan 20
+Switch(config-vlan)#name Subred2
+Switch(config-vlan)#int range fa0/1-14
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#exit
+
+
+Switch(config)#vlan 10
+Switch(config-vlan)#name Subred1
+Switch(config-vlan)#exit
+Switch(config)#int range fa0/15-24
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 10
+Switch(config-if-range)#exit
+Switch(config)#
+Switch(config)#int gi0/2
+Switch(config-if)#switchport mode trunk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
