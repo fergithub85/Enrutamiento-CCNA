@@ -1,0 +1,44 @@
+Para dividir la red 192.168.1.0/24 en 3 subredes, cada una con su VLAN correspondiente, sigamos estos pasos:
+
+Paso 1: Crear 3 subredes de la red principal 192.168.1.0/24
+La máscara de /24 permite 256 direcciones (de 0 a 255). Para obtener 3 subredes, necesitamos una máscara más restrictiva, /26 (que crea 4 subredes, pero solo usaremos 3).
+
+Cada subred de /26 tendrá 64 direcciones posibles: 62 para hosts, 1 para la red y 1 para el broadcast.
+
+Las subredes y sus rangos serían:
+
+Subred 1: 192.168.1.0/26
+
+Rango: 192.168.1.1 - 192.168.1.62
+Dirección de red: 192.168.1.0
+Broadcast: 192.168.1.63
+Subred 2: 192.168.1.64/26
+
+Rango: 192.168.1.65 - 192.168.1.126
+Dirección de red: 192.168.1.64
+Broadcast: 192.168.1.127
+Subred 3: 192.168.1.128/26
+
+Rango: 192.168.1.129 - 192.168.1.190
+Dirección de red: 192.168.1.128
+Broadcast: 192.168.1.191
+Paso 2: Asignar VLANS
+Podrías asignar las VLANs así:
+
+VLAN 10 para la Subred 1 (192.168.1.0/26)
+VLAN 20 para la Subred 2 (192.168.1.64/26)
+VLAN 30 para la Subred 3 (192.168.1.128/26)
+Cada subred estaría separada lógicamente y físicamente a través de su VLAN asignada, permitiendo un enrutamiento adecuado entre las VLANs si fuese necesario.
+
+
+
+
+
+
+Dijiste:
+y cual seria la mascara de subred?
+ChatGPT dijo:
+ChatGPT
+La máscara de subred para cada una de estas subredes sería 255.255.255.192, o en notación CIDR, /26.
+
+Con esta máscara, cada subred tendrá 64 direcciones IP, de las cuales 62 estarán disponibles para hosts, ya que una se reserva para la dirección de red y otra para el broadcast.
