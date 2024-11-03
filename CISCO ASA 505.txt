@@ -1,17 +1,40 @@
+**********************eliminar configuración previa
+ciscoasa(config)#interface vlan 1
+ciscoasa(config-if)#no ip address WARNING: DHCPD bindings cleared on interface 'inside', address pool removed
+ciscoasa(config-if)#no dhcpd address 192.168.1.5-192.168.1.35 inside
+Interface inside ip address or netmask not valid (0.0.0.0/255.255.255.255)
 
 
+*************asignar interfaces y seguridad 
+
+ciscoasa(config)#interface vlan 1
+ciscoasa(config-if)#ip address 192.168.0.1 255.255.255.0
+ciscoasa(config-if)#no shutdown
+ciscoasa(config-if)#nameif inside
+ciscoasa(config-if)#security-level 100
+
+
+ciscoasa(config)#int vlan 2
+ciscoasa(config-if)#ip add 200.10.0.1 255.255.0.0
+ciscoasa(config-if)#nameif outside
+ciscoasa(config-if)#sec
+ciscoasa(config-if)#security-level 0
+ciscoasa(config-if)#int eth0/1
+ciscoasa(config-if)#switch
+ciscoasa(config-if)#switchport access vlan 2
+ciscoasa(config-if)#no shut
 
 ciscoasa(config)#int vlan 3
 ciscoasa(config-if)#nameif DMZ
 ERROR: This license does not allow configuring more than 2 interfaces with nameif and without a "no forward" command on this interface or on 1 interface(s) with nameif already configured.
-ciscoasa(config-if)#no forward int vlan 1
-ciscoasa(config-if)#nameif DMZ
-INFO: Security level for "DMZ" set to 0 by default.
+ciscoasa(config-if)#no forward int vlan 2
+ciscoasa(config-if)#securi
 ciscoasa(config-if)#security-level 50
-ciscoasa(config-if)#ip add 192.168.3.1 255.255.255.0
-ciscoasa(config-if)#exit
+ciscoasa(config-if)#ip add 192.168.4.1 255.255.255.0
 
-	
+
+
+
 ciscoasa(config)#int et0/0
 ciscoasa(config-if)#switchport mode access
 ciscoasa(config-if)#switchport access vlan 3
