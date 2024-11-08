@@ -1,0 +1,28 @@
+DENEGAR TRAFICO ICMP HACIA DMZ:HABILITAR PING DESDE IP INTERNA A EQUIPO EXTERNO
+
+access-list INSIDE_TO_DMZ deny icmp 192.168.1.3 255.255.255.255 192.168.2.3 255.255.255.255
+access-group INSIDE_TO_DMZ in interface inside
+
+
+definiremos una clase de inspección que incluya ICMP
+
+ciscoasa(config-pmap)#class-map inspection_default
+ciscoasa(config-cmap)#match default-inspection-traffic
+
+crearemos la política de inspección y le añadiremos la inspección de ICMP.
+ciscoasa(config-cmap)#policy-map global_policy
+ciscoasa(config-pmap)#class inspection_default
+ciscoasa(config-pmap-c)#inspect icmp
+
+aplicaremos esta política en la política de servicio global para asegurarnos de que se inspeccione el tráfico ICMP.
+ciscoasa(config-pmap-c)#service-policy global_policy global
+
+
+ciscoasa(config)#access-list INSIDE_TO_DMZ deny icmp 192.168.1.3 255.255.255.255 192.168.2.3 255.255.255.255
+ciscoasa(config)#access-group INSIDE_TO_DMZ in interface inside
+ciscoasa(config)#no access-list INSIDE_TO_DMZ deny icmp 192.168.1.3 255.255.255.255 192.168.2.3 255.255.255.255
+ciscoasa(config)#access-list INSIDE_TO_DMZ deny icmp 192.168.1.3 255.255.255.255 192.168.2.3 255.255.255.255
+ciscoasa(config)#access-group INSIDE_TO_DMZ in interface inside
+
+
+
