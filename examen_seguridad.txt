@@ -1,0 +1,43 @@
+1.	¿Cómo se comporta el siguiente comando: 'iptables -A INPUT -p tcp --dport 22 -j REJECT' en relación con el tráfico TCP en el puerto 22?
+Rechaza trafico port tcp 22 y avisa
+
+2.	¿Cuál es el significado de la siguiente salida del comando iptables: "Chain INPUT (policy ACCEPT)"?
+Política predeterminada para conex existente es aceptar
+
+3.	¿Cuál es el efecto del siguiente comando: 'iptables -A INPUT -p icmp -j ACCEPT'?
+Acepta todo icmp de entrada
+
+4.	¿Cuáles son las dos categorías principales de reglas utilizadas por el Firewall de Windows para gestionar el tráfico de red?
+Reglas de programa, prt y protocolo
+5.	¿Cuál es la función del perfil público al conectarse a una red pública en un sistema Windows?
+Aumenta veloci de redes publicas
+6.	¿Cuándo se activa el perfil dominio en un sistema Windows?
+Se activa al coenctarse a un dominio de red empresarial
+
+7.	¿Cuál de los siguientes algoritmos de cifrado es comúnmente implementado por OpenSSL?
+RSA
+
+8.	¿Qué realiza el comando 'a2enmod ssl' en un entorno basado en Apache?
+Habilita soporte ssl en serv apache
+9.	¿Cuál es el propósito del siguiente comando OpenSSL? openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+Crea archivo de clave privada rsa 2048 bits y archivo autofirmado
+10.	¿Cuáles son algunos de los métodos de autenticación que SSH puede utilizar para verificar la identidad del usuario antes de permitir el acceso?
+Contraseñas y y clava publca/privada
+11.	¿Cuál es el propósito principal de los túneles SSH?
+Establecer enlaces virtuales entre serrfv tcp
+12.	Cuál es la función principal del comando 'ssh -D 8080 usuario@tuservidor.com -N'?
+Abre túnel ss dinamico en port 8080 
+13.	¿Cuál es la característica distintiva de WireGuard en términos de enrutamiento de clave criptográfica?
+Su cryptokey routing
+
+14.	¿Qué realiza el comando "nmap --script vuln" en Nmap?
+Ejecuta script espeicifcos de detec vulenrabilidad
+15.	nmap -sC" en Nmap?
+Ejecuta scripts por defecto detecciony enumeración
+16.	nmap --traceroute -sn"?
+escaneo sin eviar paquetes de ping y mostrar rut destino
+17.	Cuál es la función principal del comando "tshark -F"?
+Especifica formato salida de archivo captura
+18.	comando "tshark -D"?
+lista interfaces de red disponbles para captura
+
