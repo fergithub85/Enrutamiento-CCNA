@@ -1,0 +1,68 @@
+router eigrp 10
+ eigrp router-id 5.5.5.5
+ network 192.168.1.0
+ network 192.168.2.0
+ network 172.16.0.0
+ network 10.0.7.0 0.0.0.255
+ network 10.10.3.0 0.0.0.255
+ network 10.10.1.0 0.0.0.255
+ network 10.10.5.0 0.0.0.255
+ network 192.168.20.0
+ network 192.168.10.0
+ network 192.168.40.0
+ network 192.168.90.0
+ network 192.168.0.0
+!
+router ospf 1
+ log-adjacency-changes
+ network 172.17.0.0 0.0.0.3 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 172.16.0.0 0.0.0.3 area 0
+!
+router bgp 65001
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 192.168.40.0 remote-as 65002
+
+
+router eigrp 10
+ network 192.168.0.0
+ network 10.10.3.0 0.0.0.255
+ network 10.10.1.0 0.0.0.255
+ network 10.10.0.0 0.0.0.255
+ network 192.168.1.0
+ network 10.10.2.0 0.0.0.255
+ network 10.0.7.0 0.0.0.255
+ network 10.10.5.0 0.0.0.255
+ network 10.10.6.0 0.0.0.255
+ network 10.10.4.0 0.0.0.255
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.10.3.0 0.0.0.3 area 0
+ network 10.10.1.0 0.0.0.3 area 0
+ network 10.10.0.0 0.0.0.3 area 0
+ network 10.10.2.0 0.0.0.3 area 0
+ network 192.168.0.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 192.168.20.0 0.0.0.255 area 0
+ network 10.10.5.0 0.0.0.3 area 0
+ network 10.10.4.0 0.0.0.3 area 0
+ network 192.168.40.0 0.0.0.255 area 0
+ network 10.10.6.0 0.0.0.3 area 0
+ network 192.168.90.0 0.0.0.255 area 0
+ network 192.168.8.0 0.0.0.255 area 0
+ network 172.17.0.0 0.0.0.3 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 172.16.0.0 0.0.0.3 area 0
+!
+router bgp 65002
+ bgp log-neighbor-changes
+ no synchronization
+
+
+
+
+
